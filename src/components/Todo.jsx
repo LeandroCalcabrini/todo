@@ -1,14 +1,14 @@
-const Todo = ({todo}) => {
+const Todo = ({todo, checkComplete}) => {
     return(
-        <>
-        <li>
-            <input type="checkbox" />
-            <span>{todo.title}</span>
-            <button>Edit</button>
-            <button>Delete</button>
-
+        <li className="todoItem">
+            <input 
+            type="checkbox"
+            checked={todo.completed}
+            onChange={()=>checkComplete(todo.id)}/>
+            <span className="todoTitle">{todo.title}</span>
+            <button className="buttonEdit">Edit</button>
+            <button className="buttonDelete">Delete</button>
         </li>
-        </>
     )
 }
 

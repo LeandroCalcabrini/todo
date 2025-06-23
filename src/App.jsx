@@ -20,8 +20,14 @@ function App() {
     setTodos([...todos,newTodo]);
     setInputValue("");
     }
+  };
+
+  const checkComplete = (id) => {
+    const todoCheck = todos.map(todo => todo.id === id ? {...todo, completed:!todo.completed} : todo)
+    setTodos(todoCheck)
   }
 
+  console.log(todos)
 
 
 
@@ -39,9 +45,9 @@ function App() {
       type="submit">Add</button>
     </form>
     <div>
-      <ul>
+      <ul className="todoContainer">
         {todos.map(todo => (
-          <Todo  key={todo.id} todo={todo}/>
+          <Todo  key={todo.id} todo={todo} checkComplete={checkComplete}/>
         ))}
       </ul>
     </div>
