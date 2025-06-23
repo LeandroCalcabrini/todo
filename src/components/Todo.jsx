@@ -1,4 +1,7 @@
 import { useState } from "react"
+import deleteIcon from '../assets/icons/delete.svg';
+import editIcon from '../assets/icons/edit.svg';
+import saveIcon from '../assets/icons/save.svg';
 
 const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
     const [edit, setEdit] = useState(false);
@@ -15,11 +18,14 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
             <span className="todoTitle">{todo.title}</span>
             <button 
             className="buttonEdit"
-            onClick={()=> setEdit(true)}>Edit
+            onClick={()=> setEdit(true)}>
+                <img src={editIcon} alt="" />
             </button>
             <button 
             className="buttonDelete"
-            onClick={()=>todoDelete(todo.id)}>Delete</button>
+            onClick={()=>todoDelete(todo.id)}>
+                <img src={deleteIcon} alt="" />
+            </button>
         </li>
         )
     };
@@ -47,8 +53,9 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
                     <button
                     className="buttonSave"
                     type="button"
-                    onClick={handleSaveClick}
-                 >Save</button>              
+                    onClick={handleSaveClick}>
+                    <img src={saveIcon} alt="" />
+                    </button>              
         </li>    
         )
     };
