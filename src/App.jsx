@@ -4,6 +4,7 @@ import Todo from "./components/Todo";
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([]);
+  const [filter,setFilter] = useState("All");
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -35,13 +36,13 @@ function App() {
   const saveEditTodo = (id, editValue) => {
     const newValue = todos.map(todo => todo.id === id ? {...todo,title:editValue} : todo)
     setTodos(newValue);
-  }
+  };
 
-
-
-  console.log(todos)
-
-
+    const filterTodos = todos.filter(todo => {
+      if (filter === "Active") return !todo.completed;
+      if (filter === "Completed") return todo.completed;
+      return true
+    });
 
   return (
     <>
@@ -58,10 +59,15 @@ function App() {
     </form>
     <div>
       <ul className="todoContainer">
-        {todos.map(todo => (
+        {filterTodos.map(todo => (
           <Todo  key={todo.id} todo={todo} checkComplete={checkComplete}todoDelete={todoDelete} saveEditTodo={saveEditTodo}/>
         ))}
       </ul>
+    </div>
+    <div>
+      <button onClick={()=> setFilter("All")}>All</button>
+      <button onClick={()=> setFilter("Active")}>Active</button>
+      <button onClick={()=> setFilter("Completed")}>Completed</button>
     </div>
      
     </>
@@ -69,3 +75,4 @@ function App() {
 }
 
 export default App
+

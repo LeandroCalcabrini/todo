@@ -15,7 +15,8 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
             <span className="todoTitle">{todo.title}</span>
             <button 
             className="buttonEdit"
-            onClick={()=> setEdit(true)}>Edit</button>
+            onClick={()=> setEdit(true)}>Edit
+            </button>
             <button 
             className="buttonDelete"
             onClick={()=>todoDelete(todo.id)}>Delete</button>
