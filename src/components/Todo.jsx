@@ -1,4 +1,5 @@
-const Todo = ({todo, checkComplete}) => {
+const Todo = ({todo, checkComplete, todoDelete}) => {
+
     return(
         <li className="todoItem">
             <input 
@@ -7,7 +8,9 @@ const Todo = ({todo, checkComplete}) => {
             onChange={()=>checkComplete(todo.id)}/>
             <span className="todoTitle">{todo.title}</span>
             <button className="buttonEdit">Edit</button>
-            <button className="buttonDelete">Delete</button>
+            <button 
+            className="buttonDelete"
+            onClick={()=>todoDelete(todo.id)}>Delete</button>
         </li>
     )
 }

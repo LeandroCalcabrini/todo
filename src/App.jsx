@@ -27,6 +27,11 @@ function App() {
     setTodos(todoCheck)
   }
 
+  const todoDelete = (id) => {
+    const deleteItem = todos.filter(todo => todo.id !== id);
+    setTodos(deleteItem);
+  }
+
   console.log(todos)
 
 
@@ -47,7 +52,7 @@ function App() {
     <div>
       <ul className="todoContainer">
         {todos.map(todo => (
-          <Todo  key={todo.id} todo={todo} checkComplete={checkComplete}/>
+          <Todo  key={todo.id} todo={todo} checkComplete={checkComplete} todoDelete={todoDelete}/>
         ))}
       </ul>
     </div>
