@@ -25,12 +25,19 @@ function App() {
   const checkComplete = (id) => {
     const todoCheck = todos.map(todo => todo.id === id ? {...todo, completed:!todo.completed} : todo)
     setTodos(todoCheck)
-  }
+  };
 
   const todoDelete = (id) => {
     const deleteItem = todos.filter(todo => todo.id !== id);
     setTodos(deleteItem);
+  };
+
+  const saveEditTodo = (id, editValue) => {
+    const newValue = todos.map(todo => todo.id === id ? {...todo,title:editValue} : todo)
+    setTodos(newValue);
   }
+
+
 
   console.log(todos)
 
@@ -52,7 +59,7 @@ function App() {
     <div>
       <ul className="todoContainer">
         {todos.map(todo => (
-          <Todo  key={todo.id} todo={todo} checkComplete={checkComplete} todoDelete={todoDelete}/>
+          <Todo  key={todo.id} todo={todo} checkComplete={checkComplete}todoDelete={todoDelete} saveEditTodo={saveEditTodo}/>
         ))}
       </ul>
     </div>
