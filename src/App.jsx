@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Todo from "./components/Todo";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -21,7 +22,7 @@ function App() {
     }
   }
 
-  console.log(todos)
+
 
 
   return (
@@ -37,6 +38,13 @@ function App() {
       onClick={handleClick}
       type="submit">Add</button>
     </form>
+    <div>
+      <ul>
+        {todos.map(todo => (
+          <Todo  key={todo.id} todo={todo}/>
+        ))}
+      </ul>
+    </div>
      
     </>
   )
