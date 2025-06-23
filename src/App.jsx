@@ -2,12 +2,26 @@ import { useState } from "react"
 
 function App() {
   const [inputValue, setInputValue] = useState("");
+  const [todos, setTodos] = useState([]);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  console.log(inputValue)
+  const handleClick = (e) => {
+    e.preventDefault();
+    if(inputValue.trim()){
+       const newTodo = {
+      title: inputValue.charAt(0).toUpperCase() + inputValue.slice(1).toLowerCase(),
+      id: crypto.randomUUID(),
+      completed: false
+    };
+    setTodos([...todos,newTodo]);
+    setInputValue("");
+    }
+  }
+
+  console.log(todos)
 
 
   return (
@@ -18,7 +32,10 @@ function App() {
       onChange={handleChange}
       value={inputValue}
       type="text"/>
-      <button type="submit">Add</button>
+      <button 
+      className="buttonAdd"
+      onClick={handleClick}
+      type="submit">Add</button>
     </form>
      
     </>
