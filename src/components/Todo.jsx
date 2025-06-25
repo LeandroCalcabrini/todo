@@ -8,7 +8,6 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
     const [edit, setEdit] = useState(false);
 
     const TodoItem = () => {
-
         return(
         <li className="todoItem">
             <input 

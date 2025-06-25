@@ -1,11 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Todo from "./components/Todo";
 import '../src/App.css'
 import Swal from 'sweetalert2';
 function App() {
   const [inputValue, setInputValue] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos,setTodos] = useState(()=>{
+    const todosLocalStorage = localStorage.getItem("todos");
+    return todosLocalStorage ? JSON.parse(todosLocalStorage) : [];
+  });
   const [filter,setFilter] = useState("All");
+
+  useEffect(()=>{
+    localStorage.setItem("todos",JSON.stringify(todos))
+  },[todos])
+
+  
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
