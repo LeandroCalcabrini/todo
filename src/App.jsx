@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Todo from "./components/Todo";
 import '../src/App.css'
-
+import Swal from 'sweetalert2';
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([]);
@@ -35,8 +35,46 @@ function App() {
   };
 
   const saveEditTodo = (id, editValue) => {
-    const newValue = todos.map(todo => todo.id === id ? {...todo,title:editValue} : todo)
-    setTodos(newValue);
+    if(editValue.trim()){
+       const newValue = todos.map(todo => todo.id === id ? {...todo,title:editValue.charAt(0).toUpperCase() + editValue.slice(1).toLowerCase()} : todo);
+       setTodos(newValue);
+    }  
+  };
+
+  const deleteAll = () => {
+    const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: "btn btn-success",
+    cancelButton: "btn btn-danger"
+  },
+  buttonsStyling: true
+});
+swalWithBootstrapButtons.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonText: "Yes, delete it!",
+  cancelButtonText: "No, cancel!",
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+    setTodos([]);
+    swalWithBootstrapButtons.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
+  } else if (
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire({
+      title: "Cancelled",
+      text: "Your imaginary file is safe :)",
+      icon: "error"
+    });
+  }
+});
   };
 
     const filterTodos = todos.filter(todo => {
@@ -44,6 +82,7 @@ function App() {
       if (filter === "Completed") return todo.completed;
       return true
     });
+
 
   return (
     <div className="appContainer">
@@ -81,6 +120,10 @@ function App() {
     className={filter === "Completed" ? "filterBtn active" : "filterBtn"}
     onClick={() => setFilter("Completed")}
   >Completed</button>
+    <button 
+    className= "deleteAllBtn"
+    onClick={() => deleteAll()}
+  >Delete All</button>
 </div>
      
     </div>
