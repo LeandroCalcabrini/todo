@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Todo from "./components/Todo";
+import '../src/App.css'
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -45,7 +46,7 @@ function App() {
     });
 
   return (
-    <>
+    <div className="appContainer">
     <form className="todoForm">
       <input
       className="todoInput"
@@ -57,20 +58,31 @@ function App() {
       onClick={handleClick}
       type="submit">Add</button>
     </form>
-    <div>
-      <ul className="todoContainer">
+    <div className="todoContainer">
+      <ul>
         {filterTodos.map(todo => (
           <Todo  key={todo.id} todo={todo} checkComplete={checkComplete}todoDelete={todoDelete} saveEditTodo={saveEditTodo}/>
         ))}
       </ul>
     </div>
-    <div>
-      <button onClick={()=> setFilter("All")}>All</button>
-      <button onClick={()=> setFilter("Active")}>Active</button>
-      <button onClick={()=> setFilter("Completed")}>Completed</button>
-    </div>
+   <div className="filterButtons">
+  <button 
+    className={filter === "All" ? "filterBtn active" : "filterBtn"}
+    onClick={() => setFilter("All")}
+  >All</button>
+
+  <button 
+    className={filter === "Active" ? "filterBtn active" : "filterBtn"}
+    onClick={() => setFilter("Active")}
+  >Active</button>
+
+  <button 
+    className={filter === "Completed" ? "filterBtn active" : "filterBtn"}
+    onClick={() => setFilter("Completed")}
+  >Completed</button>
+</div>
      
-    </>
+    </div>
   )
 }
 

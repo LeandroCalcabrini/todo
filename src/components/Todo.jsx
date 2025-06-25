@@ -2,6 +2,7 @@ import { useState } from "react"
 import deleteIcon from '../assets/icons/delete.svg';
 import editIcon from '../assets/icons/edit.svg';
 import saveIcon from '../assets/icons/save.svg';
+import '../components/todo.css'
 
 const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
     const [edit, setEdit] = useState(false);
@@ -12,6 +13,7 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
         <li className="todoItem">
             <input 
             type="checkbox"
+            className="checkbox"
             checked={todo.completed}
             onChange={()=>checkComplete(todo.id)}>
             </input>
@@ -47,6 +49,7 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
             className="todoItem">
                     <input 
                     type="text"
+                    className="inputEdit"
                     value={editValue}
                     onChange={handleEditChange}>
                     </input>

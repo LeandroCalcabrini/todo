@@ -1,0 +1,52 @@
+.todoItem{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.checkbox{
+  cursor: pointer;
+  transform: scale(1.15);
+}
+.todoTitle{
+  flex: 1;
+  text-align: left;
+}
+
+.buttonEdit,
+.buttonDelete,
+.buttonSave{
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: transform 0.3s;
+}
+
+.buttonEdit:hover,
+.buttonDelete:hover,
+.buttonSave:hover{
+  transform: scale(1.1);
+}
+
+.buttonEdit img,
+.buttonDelete img,
+.buttonSave img{
+  width: 20px;
+  height: 20px;
+}
+
+.inputEdit{
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.5s;
+}
+
+.inputEdit:focus{
+    border-color: #036e1e;
+}
