@@ -6,13 +6,20 @@
   margin-bottom: 0.25rem;
 }
 
+
 .checkbox{
   cursor: pointer;
   transform: scale(1.15);
 }
+
 .todoTitle{
   flex: 1;
   text-align: left;
+}
+
+.todoTitle.active{
+  text-decoration: line-through;
+  color: #ccc;
 }
 
 .buttonEdit,

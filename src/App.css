@@ -18,6 +18,10 @@ body{
   justify-content: center;
 }
 
+.title{
+  font-size: 2.5rem;
+  text-align: center;
+}
 .appContainer{
     display: flex;
     flex-direction: column;
@@ -72,5 +76,34 @@ body{
 
 .todoContainer ul{
   list-style: none;
+}
+
+/* seccion de botones de filtro */
+.filterButtons{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.filterBtn{
+  cursor: pointer;
+  border: solid 1px #ccc;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  padding: 0.3rem;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.filterBtn:hover{
+  background-color: #e0e0e0;
+  border-color: #aaa;
+}
+
+.filterBtn.active{
+  background-color: #5c6bc0;
+  color: #ffff;
+  border-color: #5c6bc0;
 }
 

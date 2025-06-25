@@ -17,7 +17,7 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
             checked={todo.completed}
             onChange={()=>checkComplete(todo.id)}>
             </input>
-            <span className="todoTitle">{todo.title}</span>
+            <span className={todo.completed ? "todoTitle active" :"todoTitle"}>{todo.title}</span>
             <button 
             className="buttonEdit"
             onClick={()=> setEdit(true)}>

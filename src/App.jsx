@@ -47,6 +47,7 @@ function App() {
 
   return (
     <div className="appContainer">
+      <h1 className="title">To-Do List</h1>
     <form className="todoForm">
       <input
       className="todoInput"
