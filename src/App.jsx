@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Todo from "./components/Todo";
 import '../src/App.css'
 import Swal from 'sweetalert2';
+import Footer from "./components/Footer";
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [todos,setTodos] = useState(()=>{
@@ -15,12 +16,11 @@ function App() {
   },[todos])
 
   
-
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if(inputValue.trim()){
        const newTodo = {
@@ -51,7 +51,8 @@ function App() {
   };
 
   const deleteAll = () => {
-    const swalWithBootstrapButtons = Swal.mixin({
+    if(todos.length > 0){
+      const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     confirmButton: "btn btn-success",
     cancelButton: "btn btn-danger"
@@ -85,6 +86,8 @@ swalWithBootstrapButtons.fire({
   }
 });
   };
+    }
+    
 
     const filterTodos = todos.filter(todo => {
       if (filter === "Active") return !todo.completed;
@@ -94,17 +97,19 @@ swalWithBootstrapButtons.fire({
 
 
   return (
-    <div className="appContainer">
-      <h1 className="title">To-Do List</h1>
-    <form className="todoForm">
+    <>
+     <section className="appContainer">
+      <article className="app">
+        <h1 className="title">To-Do List</h1>
+    <form className="todoForm" onSubmit={handleSubmit}>
       <input
       className="todoInput"
       onChange={handleChange}
       value={inputValue}
-      type="text"/>
+      type="text"
+      placeholder="Add something new to do"/>
       <button 
       className="buttonAdd"
-      onClick={handleClick}
       type="submit">Add</button>
     </form>
     <div className="todoContainer">
@@ -134,8 +139,13 @@ swalWithBootstrapButtons.fire({
     onClick={() => deleteAll()}
   >Delete All</button>
 </div>
-     
-    </div>
+      </article>
+
+    </section>
+    <Footer/>
+  </>
+   
+    
   )
 }
 

@@ -6,6 +6,11 @@
   margin-bottom: 0.25rem;
 }
 
+.todoItem form{
+  width: 100%;
+  display: flex;
+}
+
 
 .checkbox{
   cursor: pointer;

@@ -38,7 +38,7 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
             setEditValue(e.target.value);
         };
 
-        const handleSaveClick = () => {
+        const handleSaveSubmit = () => {
             saveEditTodo(todo.id, editValue)
             setEdit(false)
         };
@@ -46,6 +46,7 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
         return(
             <li
             className="todoItem">
+                <form onSubmit={handleSaveSubmit}>
                     <input 
                     type="text"
                     className="inputEdit"
@@ -54,10 +55,12 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
                     </input>
                     <button
                     className="buttonSave"
-                    type="button"
-                    onClick={handleSaveClick}>
+                    type="submit"
+                    >
                     <img src={saveIcon} alt="" />
-                    </button>              
+                    </button>      
+                </form>
+                            
         </li>    
         )
     };
