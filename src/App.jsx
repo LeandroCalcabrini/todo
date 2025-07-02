@@ -117,6 +117,8 @@ swalWithBootstrapButtons.fire({
         {filterTodos.map(todo => (
           <Todo  key={todo.id} todo={todo} checkComplete={checkComplete}todoDelete={todoDelete} saveEditTodo={saveEditTodo}/>
         ))}
+        {filter === 'Completed' && filterTodos.length == 0 && <p className="text-error">There are no completed tasks yet</p>}
+        {filter === 'Active' && filterTodos.length == 0 && <p className="text-error">There are no pending tasks</p>}
       </ul>
     </div>
    <div className="filterButtons">
