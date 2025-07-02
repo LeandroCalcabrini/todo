@@ -6,8 +6,11 @@ import Footer from "./components/Footer";
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [todos,setTodos] = useState(()=>{
-    const todosLocalStorage = localStorage.getItem("todos");
-    return todosLocalStorage ? JSON.parse(todosLocalStorage) : [];
+    try{
+      const todosLocalStorage = localStorage.getItem("todos");
+      return todosLocalStorage ? JSON.parse(todosLocalStorage) : [];
+    }catch(error){console.error('Error al cargar el localStorage:',error)}
+    
   });
   const [filter,setFilter] = useState("All");
 
