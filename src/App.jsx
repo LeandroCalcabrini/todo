@@ -3,27 +3,28 @@ import Todo from "./components/Todo";
 import '../src/App.css'
 import Swal from 'sweetalert2';
 import Footer from "./components/Footer";
+
 function App() {
-  const [inputValue, setInputValue] = useState("");
-  const [todos,setTodos] = useState(()=>{
+  const [inputValue, setInputValue] = useState(""); // Estado para obtener el valor del input
+  const [todos,setTodos] = useState(()=>{ // Estado de las tareas, inizializada mediente localstorage
     try{
       const todosLocalStorage = localStorage.getItem("todos");
       return todosLocalStorage ? JSON.parse(todosLocalStorage) : [];
-    }catch(error){console.error('Error al cargar el localStorage:',error)}
+    }catch(error){console.error('Error al cargar el localStorage:',error)} // Manejo de error por si falla algo al traer datos del localstorage
     
   });
-  const [filter,setFilter] = useState("All");
+  const [filter,setFilter] = useState("All"); // Estado de los filtros.
 
   useEffect(()=>{
     localStorage.setItem("todos",JSON.stringify(todos))
   },[todos])
 
   
-  const handleChange = (e) => {
+  const handleChange = (e) => { //Funcion para obtener valor del input
     setInputValue(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { // Funcion para agregar una nueva tarea a la lista de tareas
     e.preventDefault();
     if(inputValue.trim()){
        const newTodo = {
@@ -36,26 +37,26 @@ function App() {
     }
   };
 
-  const checkComplete = (id) => {
+  const checkComplete = (id) => { // Funcion para indicar si una tarea esta completa
     const todoCheck = todos.map(todo => todo.id === id ? {...todo, completed:!todo.completed} : todo)
     setTodos(todoCheck)
   };
 
-  const todoDelete = (id) => {
+  const todoDelete = (id) => { // Funcion para eliminar una tarea
     const deleteItem = todos.filter(todo => todo.id !== id);
     setTodos(deleteItem);
   };
 
-  const saveEditTodo = (id, editValue) => {
+  const saveEditTodo = (id, editValue) => { // Funcion para editar una tarea
     if(editValue.trim()){
        const newValue = todos.map(todo => todo.id === id ? {...todo,title:editValue.charAt(0).toUpperCase() + editValue.slice(1).toLowerCase()} : todo);
        setTodos(newValue);
     }  
   };
 
-  const deleteAll = () => {
+  const deleteAll = () => { // Funcion para eliminar todas las tareas
     if(todos.length > 0){
-      const swalWithBootstrapButtons = Swal.mixin({
+      const swalWithBootstrapButtons = Swal.mixin({ // Uso de la librearia de SweetAler para mostrar alerta cuando quieren eliminar todas las tareas
   customClass: {
     confirmButton: "btn btn-success",
     cancelButton: "btn btn-danger"
@@ -89,10 +90,9 @@ swalWithBootstrapButtons.fire({
   }
 });
   };
-    }
-    
+    };
 
-    const filterTodos = todos.filter(todo => {
+    const filterTodos = todos.filter(todo => { // Funcion para filtrar las tareas entre pendientes, completadas y todas
       if (filter === "Active") return !todo.completed;
       if (filter === "Completed") return todo.completed;
       return true
@@ -127,14 +127,10 @@ swalWithBootstrapButtons.fire({
    <div className="filterButtons">
   <button 
     className={filter === "All" ? "filterBtn active" : "filterBtn"}
-    onClick={() => setFilter("All")}
-  >All</button>
-
+    onClick={() => setFilter("All")}>All</button>
   <button 
     className={filter === "Active" ? "filterBtn active" : "filterBtn"}
-    onClick={() => setFilter("Active")}
-  >Active</button>
-
+    onClick={() => setFilter("Active")}>Active</button>
   <button 
     className={filter === "Completed" ? "filterBtn active" : "filterBtn"}
     onClick={() => setFilter("Completed")}
@@ -145,12 +141,9 @@ swalWithBootstrapButtons.fire({
   >Delete All</button>
 </div>
       </article>
-
     </section>
     <Footer/>
-  </>
-   
-    
+  </>  
   )
 }
 

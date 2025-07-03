@@ -5,8 +5,9 @@ import saveIcon from '../assets/icons/save.svg';
 import '../components/todo.css'
 
 const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
-    const [edit, setEdit] = useState(false);
+    const [edit, setEdit] = useState(false); // Estado para 
 
+    //Componente de un item de la lista de tarea
     const TodoItem = () => {
         return(
         <li className="todoItem">
@@ -30,23 +31,23 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
         </li>
         )
     };
-
+    // Componente de un tarea cuando el usuario desea editarla
     const ItemEdit = () => {
-        const [editValue, setEditValue] = useState(todo.title);
+        const [editValue, setEditValue] = useState(todo.title); // Estado para obtener el valor del input en modo edicion
       
-        const handleEditChange = (e) => {
+        const handleEditChange = (e) => { // Funcion para obtener el valor del input
             setEditValue(e.target.value);
         };
 
-        const handleSaveSubmit = () => {
-            saveEditTodo(todo.id, editValue)
-            setEdit(false)
+        const handleSaveSubmit = () => { // Funcion para guardar cambiar el viejo titulo de la tarea con el nuevo
+            saveEditTodo(todo.id, editValue);
+            setEdit(false);
         };
 
         return(
             <li
             className="todoItem">
-                <form onSubmit={handleSaveSubmit}>
+                <form onSubmit={handleSaveSubmit}> 
                     <input 
                     type="text"
                     className="inputEdit"
@@ -64,7 +65,6 @@ const Todo = ({todo, checkComplete, todoDelete, saveEditTodo}) => {
         </li>    
         )
     };
-
     return(      
         edit ? <ItemEdit/> : <TodoItem/>  
     )
